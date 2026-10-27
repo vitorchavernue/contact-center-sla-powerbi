@@ -1,0 +1,38 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # .NET runtime for the Tabular Object Model (Microsoft's library behind Power BI semantic models)
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install --no-deps semantic-link-sempy==0.14.3
+
+      - name: Lint
+        run: |
+          ruff check .
+          ruff format --check .
+
+      - name: Semantic model and report quality gate (TMDL + best-practice rules + report references)
+        run: python scripts/validate_model.py | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Tests (data shape, business stories, quality gate catches mistakes)
+        run: pytest -q
