@@ -1,0 +1,24 @@
+{
+  "name": "Contact Center SLA",
+  "dataColors": [
+    "#0E8C8C",
+    "#F2A541",
+    "#5A7DE0",
+    "#E0604F",
+    "#8A6FD1",
+    "#2FB57C",
+    "#A8B5B6",
+    "#E07BB0"
+  ],
+  "foreground": "#0D2326",
+  "foregroundNeutralSecondary": "#557073",
+  "background": "#FFFFFF",
+  "backgroundLight": "#F2F7F7",
+  "tableAccent": "#0E8C8C",
+  "good": "#2FB57C",
+  "neutral": "#F2A541",
+  "bad": "#E0604F",
+  "maximum": "#0E8C8C",
+  "center": "#BFE7E3",
+  "minimum": "#FFFFFF"
+}
