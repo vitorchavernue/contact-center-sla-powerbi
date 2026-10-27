@@ -1,15 +1,18 @@
 /// Contact channel: Voice or WhatsApp.
 table Channel
+	lineageTag: f3452b21-9c85-4f06-aad2-3214bccaa86a
 
 	column 'Channel Key'
 		dataType: int64
 		isHidden
 		formatString: 0
+		lineageTag: 091952c1-b4c1-4ab3-9a47-bafcd3b10db8
 		summarizeBy: none
 		sourceColumn: Channel Key
 
 	column Channel
 		dataType: string
+		lineageTag: cae7367a-42e4-45de-9591-11c086c4863f
 		summarizeBy: none
 		sourceColumn: Channel
 

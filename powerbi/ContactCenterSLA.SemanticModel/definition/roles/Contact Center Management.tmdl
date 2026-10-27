@@ -2,3 +2,5 @@
 role 'Contact Center Management'
 	modelPermission: read
 
+	annotation PBI_Id = 91bf3475f92e4691b0ca41d120a925ef
+

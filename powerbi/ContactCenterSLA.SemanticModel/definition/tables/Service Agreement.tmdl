@@ -1,10 +1,12 @@
 /// Contract of each partner on each channel: wait limit, service level target and short-abandon limit.
 table 'Service Agreement'
+	lineageTag: e6961d51-d958-468e-8490-cc30c99d1037
 
 	column 'Service Key'
 		dataType: int64
 		isHidden
 		formatString: 0
+		lineageTag: 1c08b88c-16e4-4914-8360-092863b84b8f
 		summarizeBy: none
 		sourceColumn: Service Key
 
@@ -12,6 +14,7 @@ table 'Service Agreement'
 		dataType: int64
 		isHidden
 		formatString: 0
+		lineageTag: fa2fa5f6-ec22-44d6-83ff-f42340e0f516
 		summarizeBy: none
 		sourceColumn: Partner Key
 
@@ -19,6 +22,7 @@ table 'Service Agreement'
 		dataType: int64
 		isHidden
 		formatString: 0
+		lineageTag: a85b86fe-a768-4ca0-8c6a-7d1b17ec2c30
 		summarizeBy: none
 		sourceColumn: Channel Key
 
@@ -26,6 +30,7 @@ table 'Service Agreement'
 	column 'SLA Threshold Seconds'
 		dataType: int64
 		formatString: 0" s"
+		lineageTag: 2f7e1697-268e-40b5-883b-0b5ddd3e10d5
 		summarizeBy: none
 		sourceColumn: SLA Threshold Seconds
 
@@ -33,6 +38,7 @@ table 'Service Agreement'
 	column 'SLA Target'
 		dataType: double
 		formatString: 0%
+		lineageTag: 2fa40db3-0b64-4020-abe3-7a72d27d1923
 		summarizeBy: none
 		sourceColumn: SLA Target
 
@@ -40,12 +46,14 @@ table 'Service Agreement'
 	column 'Short Abandon Seconds'
 		dataType: int64
 		formatString: 0" s"
+		lineageTag: 8e83120d-8a91-4f19-bfd8-d81457639383
 		summarizeBy: none
 		sourceColumn: Short Abandon Seconds
 
 	/// Contract label, e.g. "Atlas BPO · Voice · 80% in 20 s".
 	column Contract = RELATED ( Partner[Partner] ) & " · " & RELATED ( Channel[Channel] ) & " · " & FORMAT ( 'Service Agreement'[SLA Target], "0%" ) & " in " & 'Service Agreement'[SLA Threshold Seconds] & " s"
 		dataType: string
+		lineageTag: a7043abd-8e00-47d6-9a58-e7fc32ac9eb3
 		summarizeBy: none
 
 	partition 'Service Agreement' = m

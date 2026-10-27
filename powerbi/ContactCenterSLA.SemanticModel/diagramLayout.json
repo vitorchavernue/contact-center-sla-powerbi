@@ -1,0 +1,139 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 414.87143468673128,
+            "y": 811.51009140175688
+          },
+          "nodeIndex": "Channel",
+          "nodeLineageTag": "f3452b21-9c85-4f06-aad2-3214bccaa86a",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 373.03479086363365,
+            "y": 157.76849883533259
+          },
+          "nodeIndex": "Contacts",
+          "nodeLineageTag": "8ba4b370-60bc-4624-8af8-99045c9a48df",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 659.12309320806276,
+            "y": 484.06882428534226
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "32bf8eb5-3440-4080-ba5e-cd13c60e7eb6",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 84.0125171430775,
+            "y": 440.66066385422442
+          },
+          "nodeIndex": "Partner",
+          "nodeLineageTag": "b891ee46-6ef3-48af-9bf0-b6cf4cbc66d5",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 893.12309320806276,
+            "y": 430.75504570087844
+          },
+          "nodeIndex": "Partner Access",
+          "nodeLineageTag": "746e352f-4bd4-4e7b-81a4-ed1c4c936f58",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 584.79835233542883,
+            "y": -49.983803292349194
+          },
+          "nodeIndex": "Queue",
+          "nodeLineageTag": "ddd49523-9809-48e2-bb2c-9f605a6e4257",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 646.85827901620212
+          },
+          "nodeIndex": "Service Agreement",
+          "nodeLineageTag": "e6961d51-d958-468e-8490-cc30c99d1037",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1177.1230932080628,
+            "y": 430.75504570087844
+          },
+          "nodeIndex": "Time Intelligence",
+          "nodeLineageTag": "f14c1ede-0c2b-4fe0-9792-ce8208267116",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 208.44484376235198,
+            "y": -50
+          },
+          "nodeIndex": "Time Interval",
+          "nodeLineageTag": "3d154b96-407f-4b8b-91f2-1b467ab5f02b",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

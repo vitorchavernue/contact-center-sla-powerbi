@@ -1,20 +1,24 @@
 /// Reason for the contact (service queue).
 table Queue
+	lineageTag: ddd49523-9809-48e2-bb2c-9f605a6e4257
 
 	column 'Queue Key'
 		dataType: int64
 		isHidden
 		formatString: 0
+		lineageTag: 3a13bfe1-d324-4852-b779-aed2192b8898
 		summarizeBy: none
 		sourceColumn: Queue Key
 
 	column Queue
 		dataType: string
+		lineageTag: f60287e4-8189-4534-b084-390b60ceb56d
 		summarizeBy: none
 		sourceColumn: Queue
 
 	column Priority
 		dataType: string
+		lineageTag: 66bfba6e-d9c5-49af-befe-d31822fa8abc
 		summarizeBy: none
 		sourceColumn: Priority
 

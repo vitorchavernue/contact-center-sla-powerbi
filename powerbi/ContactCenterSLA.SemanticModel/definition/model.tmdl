@@ -3,6 +3,9 @@ model Model
 	defaultPowerBIDataSourceVersion: powerBI_V3
 	discourageImplicitMeasures
 	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
 
 annotation PBI_QueryOrder = ["DataFolder", "RangeStart", "RangeEnd", "Contacts", "Service Agreement", "Partner", "Channel", "Queue", "Date", "Time Interval", "Partner Access"]
 
@@ -22,4 +25,6 @@ ref table 'Partner Access'
 
 ref role 'Partner Manager'
 ref role 'Contact Center Management'
+
+ref cultureInfo en-US
 

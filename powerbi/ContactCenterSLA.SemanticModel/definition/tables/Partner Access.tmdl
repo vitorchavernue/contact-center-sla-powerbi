@@ -1,10 +1,12 @@
 /// Row-level security: which partner each partner manager may see (not connected to the model, used by the role filter).
 table 'Partner Access'
 	isHidden
+	lineageTag: 746e352f-4bd4-4e7b-81a4-ed1c4c936f58
 
 	column 'User Email'
 		dataType: string
 		isHidden
+		lineageTag: 69919c33-3512-4318-8d3d-dc921c54c66d
 		summarizeBy: none
 		sourceColumn: User Email
 
@@ -12,6 +14,7 @@ table 'Partner Access'
 		dataType: int64
 		isHidden
 		formatString: 0
+		lineageTag: 77cc53dd-dff8-4a52-a7d4-98960ae91e6a
 		summarizeBy: none
 		sourceColumn: Partner Key
 

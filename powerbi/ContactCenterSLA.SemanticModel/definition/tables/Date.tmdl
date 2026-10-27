@@ -1,17 +1,22 @@
 /// Calendar (marked as the date table for time intelligence).
 table Date
+	lineageTag: 32bf8eb5-3440-4080-ba5e-cd13c60e7eb6
 	dataCategory: Time
 
 	column Date
 		dataType: dateTime
 		isKey
 		formatString: Short Date
+		lineageTag: 397b531b-a33a-48bc-b8ff-78afa4b31a33
 		summarizeBy: none
 		sourceColumn: Date
+
+		annotation UnderlyingDateTimeDataType = Date
 
 	column Year
 		dataType: int64
 		formatString: 0
+		lineageTag: 6859f853-9c1d-4938-9ee4-667a480a6544
 		summarizeBy: none
 		sourceColumn: Year
 
@@ -19,11 +24,15 @@ table Date
 		dataType: dateTime
 		isHidden
 		formatString: Short Date
+		lineageTag: 53425e0f-f444-40e2-9de5-a7c139b774b9
 		summarizeBy: none
 		sourceColumn: Month Start
 
+		annotation UnderlyingDateTimeDataType = Date
+
 	column Month
 		dataType: string
+		lineageTag: aeaba8b6-4152-4b47-b6e6-54914e74b3b9
 		summarizeBy: none
 		sourceColumn: Month
 		sortByColumn: 'Month Index'
@@ -32,11 +41,13 @@ table Date
 		dataType: int64
 		isHidden
 		formatString: 0
+		lineageTag: 13b65248-cec3-4e89-bddf-06b1edafa704
 		summarizeBy: none
 		sourceColumn: Month Index
 
 	column Weekday
 		dataType: string
+		lineageTag: b1d7db30-2ea4-423d-8379-e743075a21fc
 		summarizeBy: none
 		sourceColumn: Weekday
 		sortByColumn: 'Weekday Number'
@@ -45,11 +56,13 @@ table Date
 		dataType: int64
 		isHidden
 		formatString: 0
+		lineageTag: 69884586-202e-4d15-b875-e9f81e868638
 		summarizeBy: none
 		sourceColumn: Weekday Number
 
 	column 'Day Type'
 		dataType: string
+		lineageTag: c17ff962-1302-467f-8607-f89ae8c58172
 		summarizeBy: none
 		sourceColumn: Day Type
 

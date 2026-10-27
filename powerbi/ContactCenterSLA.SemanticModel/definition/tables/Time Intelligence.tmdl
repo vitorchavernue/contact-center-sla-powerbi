@@ -1,5 +1,6 @@
 /// Calculation group: the same measure for the current period, month/year to date and against last year.
 table 'Time Intelligence'
+	lineageTag: f14c1ede-0c2b-4fe0-9792-ce8208267116
 
 	calculationGroup
 		precedence: 10
@@ -26,6 +27,7 @@ table 'Time Intelligence'
 
 	column Period
 		dataType: string
+		lineageTag: b100942b-a397-4f41-ad52-138172ea86a9
 		summarizeBy: none
 		sourceColumn: Name
 		sortByColumn: Ordinal
@@ -34,6 +36,7 @@ table 'Time Intelligence'
 		dataType: int64
 		isHidden
 		formatString: 0
+		lineageTag: 85a6ec0f-d1ac-48be-aac4-f7750bfb4eab
 		summarizeBy: sum
 		sourceColumn: Ordinal
 

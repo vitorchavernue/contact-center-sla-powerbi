@@ -1,15 +1,18 @@
 /// Folder with the files created by scripts/generate_data.py (must end with a backslash).
 expression DataFolder = "C:\dev\data\contact_center\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 6ca21492-caa1-497c-8171-d43003070c97
 
 	annotation PBI_ResultType = Text
 
 /// Incremental refresh: start of the period loaded by each partition (set by the Power BI service).
 expression RangeStart = #datetime(2024, 10, 1, 0, 0, 0) meta [IsParameterQuery=true, Type="DateTime", IsParameterQueryRequired=true]
+	lineageTag: 6b720608-7cd3-4b4a-a517-2854294afcb8
 
 	annotation PBI_ResultType = DateTime
 
 /// Incremental refresh: end of the period loaded by each partition (exclusive).
 expression RangeEnd = #datetime(2026, 10, 1, 0, 0, 0) meta [IsParameterQuery=true, Type="DateTime", IsParameterQueryRequired=true]
+	lineageTag: a0ca4ad7-857a-4a88-bb43-7f93799b349d
 
 	annotation PBI_ResultType = DateTime
 

@@ -1,21 +1,25 @@
 /// Half-hour intervals of the day (contact centers are planned and measured by interval).
 table 'Time Interval'
+	lineageTag: 3d154b96-407f-4b8b-91f2-1b467ab5f02b
 
 	column 'Interval Key'
 		dataType: int64
 		isHidden
 		formatString: 0
+		lineageTag: 352ee1f0-2547-4ae0-a30e-0ca8593046a8
 		summarizeBy: none
 		sourceColumn: Interval Key
 
 	column Interval
 		dataType: string
+		lineageTag: 774f7e9e-fcc4-4423-8676-bfef0eb48365
 		summarizeBy: none
 		sourceColumn: Interval
 		sortByColumn: 'Interval Key'
 
 	column 'Day Period'
 		dataType: string
+		lineageTag: 4213818d-e1d0-43f5-8f39-7884d0d9779c
 		summarizeBy: none
 		sourceColumn: Day Period
 

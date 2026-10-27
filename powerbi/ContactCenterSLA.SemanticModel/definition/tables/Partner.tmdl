@@ -1,20 +1,24 @@
 /// BPO partners that answer the bank's customers.
 table Partner
+	lineageTag: b891ee46-6ef3-48af-9bf0-b6cf4cbc66d5
 
 	column 'Partner Key'
 		dataType: int64
 		isHidden
 		formatString: 0
+		lineageTag: 74dfd332-7620-4cb3-82ff-6607c7571b31
 		summarizeBy: none
 		sourceColumn: Partner Key
 
 	column Partner
 		dataType: string
+		lineageTag: 05dd82b0-2d63-49dd-b209-4dde12c37dc6
 		summarizeBy: none
 		sourceColumn: Partner
 
 	column Site
 		dataType: string
+		lineageTag: 7b4b60f5-ea0b-4588-ac93-dd0b9114f49e
 		summarizeBy: none
 		sourceColumn: Site
 

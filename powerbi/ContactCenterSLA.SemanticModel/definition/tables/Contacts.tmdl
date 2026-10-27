@@ -1,5 +1,6 @@
 /// One row per contact (voice call or WhatsApp conversation) offered to a partner.
 table Contacts
+	lineageTag: 8ba4b370-60bc-4624-8af8-99045c9a48df
 
 	refreshPolicy
 		policyType: basic
@@ -27,16 +28,19 @@ table Contacts
 	measure 'Contacts Offered' = COUNTROWS ( Contacts )
 		formatString: #,0
 		displayFolder: 1. Volume
+		lineageTag: 9aa1fe75-a488-46ee-bf8e-0bab5bb68247
 
 	/// Contacts answered by an agent.
 	measure 'Contacts Answered' = CALCULATE ( [Contacts Offered], Contacts[Outcome] = "Answered" )
 		formatString: #,0
 		displayFolder: 1. Volume
+		lineageTag: 10d3d886-2861-4965-ab68-ad1dacde4674
 
 	/// Customers who gave up before being answered (including short abandons).
 	measure 'Contacts Abandoned' = CALCULATE ( [Contacts Offered], Contacts[Outcome] = "Abandoned" )
 		formatString: #,0
 		displayFolder: 1. Volume
+		lineageTag: 528647db-8ada-4278-b412-bac594685c34
 
 	/// Abandoned within the short-abandon limit of the contract (wrong number, changed mind). Not counted against the partner.
 	measure 'Short Abandons' =
@@ -49,11 +53,13 @@ table Contacts
 			)
 		formatString: #,0
 		displayFolder: 1. Volume
+		lineageTag: 5a216738-3666-4f8b-a085-b78a54dea31d
 
 	/// Abandoned contacts that count against the partner, over the contacts that count.
 	measure 'Abandon Rate' = DIVIDE ( [Contacts Abandoned] - [Short Abandons], [Contacts Offered] - [Short Abandons] )
 		formatString: 0.0%
 		displayFolder: 1. Volume
+		lineageTag: d7791267-7f88-43d1-bc71-348736d965fe
 
 	/// Answered within the wait limit of each partner's contract (adaptive threshold).
 	measure 'Answered Within SLA' =
@@ -66,11 +72,13 @@ table Contacts
 			)
 		formatString: #,0
 		displayFolder: 2. Service Level
+		lineageTag: 09213a7d-5d1c-4445-a3fc-b75652584e59
 
 	/// Service level: answered within the contract limit / (offered - short abandons).
 	measure 'Service Level %' = DIVIDE ( [Answered Within SLA], [Contacts Offered] - [Short Abandons] )
 		formatString: 0.0%
 		displayFolder: 2. Service Level
+		lineageTag: 8505e218-df07-4247-81b1-1b04312827a0
 
 	/// Contract target. Selections with several contracts use the target weighted by volume.
 	measure 'SLA Target %' =
@@ -80,6 +88,7 @@ table Contacts
 			)
 		formatString: 0.0%
 		displayFolder: 2. Service Level
+		lineageTag: 63f13966-9b4b-46d5-b5ba-ee3bf484a24c
 
 	/// Service level minus target, in percentage points (negative = below target).
 	measure 'SLA Gap' =
@@ -87,12 +96,14 @@ table Contacts
 			RETURN IF ( NOT ISBLANK ( sl ), sl - [SLA Target %] )
 		formatString: +0.0%;-0.0%;0.0%
 		displayFolder: 2. Service Level
+		lineageTag: 2fac1012-99a9-461d-9935-cd3a8183a9e1
 
 	/// "Met" or "Missed" against the contract target.
 	measure 'SLA Status' =
 			VAR gap = [SLA Gap]
 			RETURN IF ( NOT ISBLANK ( gap ), IF ( gap >= 0, "Met", "Missed" ) )
 		displayFolder: 2. Service Level
+		lineageTag: d9d658bb-0505-43a9-bea4-8bf252aeef22
 
 	/// Share of half-hour intervals (per day) in which the service level met the target.
 	measure 'Intervals Meeting SLA %' =
@@ -106,43 +117,50 @@ table Contacts
 				DIVIDE ( COUNTROWS ( FILTER ( intervals, [SLA Gap] >= 0 ) ), COUNTROWS ( intervals ) )
 		formatString: 0.0%
 		displayFolder: 2. Service Level
+		lineageTag: 6495c338-53a1-4d81-b104-07532e5e2c53
 
 	/// Contracts (partner + channel) whose service level is below target in the selection.
-	measure 'Contracts Below Target' =
-			COUNTROWS ( FILTER ( VALUES ( 'Service Agreement'[Service Key] ), [SLA Gap] < 0 ) )
+	measure 'Contracts Below Target' = COUNTROWS ( FILTER ( VALUES ( 'Service Agreement'[Service Key] ), [SLA Gap] < 0 ) )
 		formatString: #,0
 		displayFolder: 2. Service Level
+		lineageTag: d35505e5-7314-4240-84ef-70b292ff0283
 
 	/// Average speed of answer: average wait of answered contacts, in seconds.
 	measure 'ASA (s)' = CALCULATE ( AVERAGE ( Contacts[Wait Seconds] ), Contacts[Outcome] = "Answered" )
 		formatString: #,0
 		displayFolder: 3. Speed & Handling
+		lineageTag: 8931b884-3bba-49e0-b93a-be97515e1ae1
 
 	/// Average handle time of answered contacts (talk + after-contact work), in seconds.
 	measure 'AHT (s)' = CALCULATE ( AVERAGE ( Contacts[Handle Seconds] ), Contacts[Outcome] = "Answered" )
 		formatString: #,0
 		displayFolder: 3. Speed & Handling
+		lineageTag: 95a62462-23c0-44e1-8cff-ce06de1fabeb
 
 	/// Agent time spent handling contacts, in hours (basis for staffing and partner billing).
 	measure 'Workload Hours' = DIVIDE ( SUM ( Contacts[Handle Seconds] ), 3600 )
 		formatString: #,0
 		displayFolder: 3. Speed & Handling
+		lineageTag: c6f6b23d-2124-4a31-85a2-1f8c7d2afe0b
 
 	/// Longest wait before an answer, in seconds.
 	measure 'Longest Wait (s)' = CALCULATE ( MAX ( Contacts[Wait Seconds] ), Contacts[Outcome] = "Answered" )
 		formatString: #,0
 		displayFolder: 3. Speed & Handling
+		lineageTag: 97e0221e-05ca-4ee3-a691-fab615956d08
 
 	column 'Contact ID'
 		dataType: int64
 		isHidden
 		formatString: 0
+		lineageTag: 6974867d-c18f-4284-bc61-e9be7900446c
 		summarizeBy: none
 		sourceColumn: Contact ID
 
 	column 'Contact Start'
 		dataType: dateTime
 		formatString: General Date
+		lineageTag: dce9b9eb-24ae-4283-a440-c7f31fa83e28
 		summarizeBy: none
 		sourceColumn: Contact Start
 
@@ -150,13 +168,17 @@ table Contacts
 		dataType: dateTime
 		isHidden
 		formatString: Short Date
+		lineageTag: 040ad8e6-cee8-4ea2-b663-07341a0db979
 		summarizeBy: none
 		sourceColumn: Contact Date
+
+		annotation UnderlyingDateTimeDataType = Date
 
 	column 'Interval Key'
 		dataType: int64
 		isHidden
 		formatString: 0
+		lineageTag: 59026655-df41-48ab-b5f7-1c8ab6db4743
 		summarizeBy: none
 		sourceColumn: Interval Key
 
@@ -164,6 +186,7 @@ table Contacts
 		dataType: int64
 		isHidden
 		formatString: 0
+		lineageTag: 4469dab1-8480-4718-b1fc-9cdb86e65592
 		summarizeBy: none
 		sourceColumn: Service Key
 
@@ -171,23 +194,27 @@ table Contacts
 		dataType: int64
 		isHidden
 		formatString: 0
+		lineageTag: 161027f5-866b-47d5-85e7-5b87438a3e25
 		summarizeBy: none
 		sourceColumn: Queue Key
 
 	column Outcome
 		dataType: string
+		lineageTag: ce48e0bc-9319-4414-adc0-a3c6166be524
 		summarizeBy: none
 		sourceColumn: Outcome
 
 	column 'Wait Seconds'
 		dataType: int64
 		formatString: #,0
+		lineageTag: cb174fb0-6d8c-403d-a7e2-6b90f4e8d32e
 		summarizeBy: none
 		sourceColumn: Wait Seconds
 
 	column 'Handle Seconds'
 		dataType: int64
 		formatString: #,0
+		lineageTag: 901a5cb6-e657-4c13-9da8-bc62ef709faa
 		summarizeBy: none
 		sourceColumn: Handle Seconds
 

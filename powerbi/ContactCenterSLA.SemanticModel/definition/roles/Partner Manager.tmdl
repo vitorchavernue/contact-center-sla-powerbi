@@ -6,3 +6,5 @@ role 'Partner Manager'
 
 	tablePermission 'Partner Access' = 'Partner Access'[User Email] = USERPRINCIPALNAME ()
 
+	annotation PBI_Id = 386fcdc85d584a3f85acee201609c62e
+
