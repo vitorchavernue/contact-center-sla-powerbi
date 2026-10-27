@@ -1,0 +1,6 @@
+# generated data (scripts/generate_data.py) and Power BI local cache
+data/
+powerbi/**/.pbi/
+__pycache__/
+.pytest_cache/
+.ruff_cache/

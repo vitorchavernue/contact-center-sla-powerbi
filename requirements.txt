@@ -1,0 +1,9 @@
+# data generator, reference KPIs and tests
+numpy>=2.0
+pandas>=2.2
+pyarrow>=15
+pytest>=8.0
+ruff>=0.6
+# quality gate: Microsoft's Tabular Object Model through .NET (TOM assemblies from semantic-link-sempy,
+# installed with --no-deps, see the Makefile)
+pythonnet==3.2.1
