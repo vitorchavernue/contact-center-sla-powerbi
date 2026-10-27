@@ -1,0 +1,26 @@
+/// Contact channel: Voice or WhatsApp.
+table Channel
+
+	column 'Channel Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: Channel Key
+
+	column Channel
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Channel
+
+	partition Channel = m
+		mode: import
+		source =
+				let
+					Source = Parquet.Document ( File.Contents ( DataFolder & "dimensions\channel.parquet" ) ),
+					Typed = Table.TransformColumnTypes ( Source, { { "Channel Key", Int64.Type }, { "Channel", type text } } )
+				in
+					Typed
+
+	annotation PBI_ResultType = Table
+

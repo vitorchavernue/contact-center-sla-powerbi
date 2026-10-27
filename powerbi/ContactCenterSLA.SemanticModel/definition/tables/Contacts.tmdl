@@ -1,0 +1,213 @@
+/// One row per contact (voice call or WhatsApp conversation) offered to a partner.
+table Contacts
+
+	refreshPolicy
+		policyType: basic
+		rollingWindowGranularity: month
+		rollingWindowPeriods: 24
+		incrementalGranularity: day
+		incrementalPeriods: 3
+		sourceExpression =
+			let
+				Files = Folder.Files ( DataFolder & "contacts" ),
+				Parquet = Table.SelectRows ( Files, each [Extension] = ".parquet" ),
+				// one file per month (contacts_YYYY-MM.parquet): open only the months inside the window
+				WithMonth = Table.AddColumn ( Parquet, "Month Start", each #datetime ( Number.FromText ( Text.Middle ( [Name], 9, 4 ) ), Number.FromText ( Text.Middle ( [Name], 14, 2 ) ), 1, 0, 0, 0 ), type datetime ),
+				InWindow = Table.SelectRows ( WithMonth, each [Month Start] < RangeEnd and Date.AddMonths ( [Month Start], 1 ) > RangeStart ),
+				Tables = List.Transform ( InWindow[Content], each Parquet.Document ( _ ) ),
+				Schema = type table [ #"Contact ID" = Int64.Type, #"Contact Start" = datetime, #"Contact Date" = date, #"Interval Key" = Int64.Type, #"Service Key" = Int64.Type, #"Queue Key" = Int64.Type, Outcome = text, #"Wait Seconds" = Int64.Type, #"Handle Seconds" = Int64.Type ],
+				Combined = if List.IsEmpty ( Tables ) then #table ( Schema, {} ) else Table.Combine ( Tables ),
+				Typed = Table.TransformColumnTypes ( Combined, { { "Contact ID", Int64.Type }, { "Contact Start", type datetime }, { "Contact Date", type date }, { "Interval Key", Int64.Type }, { "Service Key", Int64.Type }, { "Queue Key", Int64.Type }, { "Outcome", type text }, { "Wait Seconds", Int64.Type }, { "Handle Seconds", Int64.Type } } ),
+				// incremental refresh: each partition loads only its own period
+				InRange = Table.SelectRows ( Typed, each [Contact Start] >= RangeStart and [Contact Start] < RangeEnd )
+			in
+				InRange
+
+	/// Contacts that reached a partner queue (answered + abandoned).
+	measure 'Contacts Offered' = COUNTROWS ( Contacts )
+		formatString: #,0
+		displayFolder: 1. Volume
+
+	/// Contacts answered by an agent.
+	measure 'Contacts Answered' = CALCULATE ( [Contacts Offered], Contacts[Outcome] = "Answered" )
+		formatString: #,0
+		displayFolder: 1. Volume
+
+	/// Customers who gave up before being answered (including short abandons).
+	measure 'Contacts Abandoned' = CALCULATE ( [Contacts Offered], Contacts[Outcome] = "Abandoned" )
+		formatString: #,0
+		displayFolder: 1. Volume
+
+	/// Abandoned within the short-abandon limit of the contract (wrong number, changed mind). Not counted against the partner.
+	measure 'Short Abandons' =
+			-- each contract has its own limit (voice 5 s, WhatsApp 30 s)
+			SUMX (
+				'Service Agreement',
+				VAR limit = 'Service Agreement'[Short Abandon Seconds]
+				RETURN
+					CALCULATE ( [Contacts Offered], Contacts[Outcome] = "Abandoned", Contacts[Wait Seconds] <= limit )
+			)
+		formatString: #,0
+		displayFolder: 1. Volume
+
+	/// Abandoned contacts that count against the partner, over the contacts that count.
+	measure 'Abandon Rate' = DIVIDE ( [Contacts Abandoned] - [Short Abandons], [Contacts Offered] - [Short Abandons] )
+		formatString: 0.0%
+		displayFolder: 1. Volume
+
+	/// Answered within the wait limit of each partner's contract (adaptive threshold).
+	measure 'Answered Within SLA' =
+			-- the limit changes by partner and channel: evaluate each contract with its own limit
+			SUMX (
+				'Service Agreement',
+				VAR threshold = 'Service Agreement'[SLA Threshold Seconds]
+				RETURN
+					CALCULATE ( [Contacts Offered], Contacts[Outcome] = "Answered", Contacts[Wait Seconds] <= threshold )
+			)
+		formatString: #,0
+		displayFolder: 2. Service Level
+
+	/// Service level: answered within the contract limit / (offered - short abandons).
+	measure 'Service Level %' = DIVIDE ( [Answered Within SLA], [Contacts Offered] - [Short Abandons] )
+		formatString: 0.0%
+		displayFolder: 2. Service Level
+
+	/// Contract target. Selections with several contracts use the target weighted by volume.
+	measure 'SLA Target %' =
+			DIVIDE (
+				SUMX ( 'Service Agreement', 'Service Agreement'[SLA Target] * [Contacts Offered] ),
+				[Contacts Offered]
+			)
+		formatString: 0.0%
+		displayFolder: 2. Service Level
+
+	/// Service level minus target, in percentage points (negative = below target).
+	measure 'SLA Gap' =
+			VAR sl = [Service Level %]
+			RETURN IF ( NOT ISBLANK ( sl ), sl - [SLA Target %] )
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 2. Service Level
+
+	/// "Met" or "Missed" against the contract target.
+	measure 'SLA Status' =
+			VAR gap = [SLA Gap]
+			RETURN IF ( NOT ISBLANK ( gap ), IF ( gap >= 0, "Met", "Missed" ) )
+		displayFolder: 2. Service Level
+
+	/// Share of half-hour intervals (per day) in which the service level met the target.
+	measure 'Intervals Meeting SLA %' =
+			-- a month can meet the target on average while failing every morning peak
+			VAR intervals =
+				FILTER (
+					CROSSJOIN ( VALUES ( 'Date'[Date] ), VALUES ( 'Time Interval'[Interval Key] ) ),
+					[Contacts Offered] > 0
+				)
+			RETURN
+				DIVIDE ( COUNTROWS ( FILTER ( intervals, [SLA Gap] >= 0 ) ), COUNTROWS ( intervals ) )
+		formatString: 0.0%
+		displayFolder: 2. Service Level
+
+	/// Contracts (partner + channel) whose service level is below target in the selection.
+	measure 'Contracts Below Target' =
+			COUNTROWS ( FILTER ( VALUES ( 'Service Agreement'[Service Key] ), [SLA Gap] < 0 ) )
+		formatString: #,0
+		displayFolder: 2. Service Level
+
+	/// Average speed of answer: average wait of answered contacts, in seconds.
+	measure 'ASA (s)' = CALCULATE ( AVERAGE ( Contacts[Wait Seconds] ), Contacts[Outcome] = "Answered" )
+		formatString: #,0
+		displayFolder: 3. Speed & Handling
+
+	/// Average handle time of answered contacts (talk + after-contact work), in seconds.
+	measure 'AHT (s)' = CALCULATE ( AVERAGE ( Contacts[Handle Seconds] ), Contacts[Outcome] = "Answered" )
+		formatString: #,0
+		displayFolder: 3. Speed & Handling
+
+	/// Agent time spent handling contacts, in hours (basis for staffing and partner billing).
+	measure 'Workload Hours' = DIVIDE ( SUM ( Contacts[Handle Seconds] ), 3600 )
+		formatString: #,0
+		displayFolder: 3. Speed & Handling
+
+	/// Longest wait before an answer, in seconds.
+	measure 'Longest Wait (s)' = CALCULATE ( MAX ( Contacts[Wait Seconds] ), Contacts[Outcome] = "Answered" )
+		formatString: #,0
+		displayFolder: 3. Speed & Handling
+
+	column 'Contact ID'
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: Contact ID
+
+	column 'Contact Start'
+		dataType: dateTime
+		formatString: General Date
+		summarizeBy: none
+		sourceColumn: Contact Start
+
+	column 'Contact Date'
+		dataType: dateTime
+		isHidden
+		formatString: Short Date
+		summarizeBy: none
+		sourceColumn: Contact Date
+
+	column 'Interval Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: Interval Key
+
+	column 'Service Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: Service Key
+
+	column 'Queue Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: Queue Key
+
+	column Outcome
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Outcome
+
+	column 'Wait Seconds'
+		dataType: int64
+		formatString: #,0
+		summarizeBy: none
+		sourceColumn: Wait Seconds
+
+	column 'Handle Seconds'
+		dataType: int64
+		formatString: #,0
+		summarizeBy: none
+		sourceColumn: Handle Seconds
+
+	partition Contacts = m
+		mode: import
+		source =
+				let
+					Files = Folder.Files ( DataFolder & "contacts" ),
+					Parquet = Table.SelectRows ( Files, each [Extension] = ".parquet" ),
+					// one file per month (contacts_YYYY-MM.parquet): open only the months inside the window
+					WithMonth = Table.AddColumn ( Parquet, "Month Start", each #datetime ( Number.FromText ( Text.Middle ( [Name], 9, 4 ) ), Number.FromText ( Text.Middle ( [Name], 14, 2 ) ), 1, 0, 0, 0 ), type datetime ),
+					InWindow = Table.SelectRows ( WithMonth, each [Month Start] < RangeEnd and Date.AddMonths ( [Month Start], 1 ) > RangeStart ),
+					Tables = List.Transform ( InWindow[Content], each Parquet.Document ( _ ) ),
+					Schema = type table [ #"Contact ID" = Int64.Type, #"Contact Start" = datetime, #"Contact Date" = date, #"Interval Key" = Int64.Type, #"Service Key" = Int64.Type, #"Queue Key" = Int64.Type, Outcome = text, #"Wait Seconds" = Int64.Type, #"Handle Seconds" = Int64.Type ],
+					Combined = if List.IsEmpty ( Tables ) then #table ( Schema, {} ) else Table.Combine ( Tables ),
+					Typed = Table.TransformColumnTypes ( Combined, { { "Contact ID", Int64.Type }, { "Contact Start", type datetime }, { "Contact Date", type date }, { "Interval Key", Int64.Type }, { "Service Key", Int64.Type }, { "Queue Key", Int64.Type }, { "Outcome", type text }, { "Wait Seconds", Int64.Type }, { "Handle Seconds", Int64.Type } } ),
+					// incremental refresh: each partition loads only its own period
+					InRange = Table.SelectRows ( Typed, each [Contact Start] >= RangeStart and [Contact Start] < RangeEnd )
+				in
+					InRange
+
+	annotation PBI_ResultType = Table
+

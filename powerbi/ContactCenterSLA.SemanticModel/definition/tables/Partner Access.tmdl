@@ -1,0 +1,28 @@
+/// Row-level security: which partner each partner manager may see (not connected to the model, used by the role filter).
+table 'Partner Access'
+	isHidden
+
+	column 'User Email'
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: User Email
+
+	column 'Partner Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: Partner Key
+
+	partition 'Partner Access' = m
+		mode: import
+		source =
+				let
+					Source = Parquet.Document ( File.Contents ( DataFolder & "security\partner_access.parquet" ) ),
+					Typed = Table.TransformColumnTypes ( Source, { { "User Email", type text }, { "Partner Key", Int64.Type } } )
+				in
+					Typed
+
+	annotation PBI_ResultType = Table
+

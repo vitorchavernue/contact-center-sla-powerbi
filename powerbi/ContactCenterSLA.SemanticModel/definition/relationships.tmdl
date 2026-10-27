@@ -1,0 +1,24 @@
+relationship contacts_date
+	fromColumn: Contacts.'Contact Date'
+	toColumn: Date.Date
+
+relationship contacts_interval
+	fromColumn: Contacts.'Interval Key'
+	toColumn: 'Time Interval'.'Interval Key'
+
+relationship contacts_service
+	fromColumn: Contacts.'Service Key'
+	toColumn: 'Service Agreement'.'Service Key'
+
+relationship contacts_queue
+	fromColumn: Contacts.'Queue Key'
+	toColumn: Queue.'Queue Key'
+
+relationship service_partner
+	fromColumn: 'Service Agreement'.'Partner Key'
+	toColumn: Partner.'Partner Key'
+
+relationship service_channel
+	fromColumn: 'Service Agreement'.'Channel Key'
+	toColumn: Channel.'Channel Key'
+

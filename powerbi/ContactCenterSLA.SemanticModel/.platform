@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "ContactCenterSLA"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "923f79b5-c32a-45d7-9a07-00136cdb043d"
+  }
+}

@@ -1,0 +1,31 @@
+/// Reason for the contact (service queue).
+table Queue
+
+	column 'Queue Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: Queue Key
+
+	column Queue
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Queue
+
+	column Priority
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Priority
+
+	partition Queue = m
+		mode: import
+		source =
+				let
+					Source = Parquet.Document ( File.Contents ( DataFolder & "dimensions\queue.parquet" ) ),
+					Typed = Table.TransformColumnTypes ( Source, { { "Queue Key", Int64.Type }, { "Queue", type text }, { "Priority", type text } } )
+				in
+					Typed
+
+	annotation PBI_ResultType = Table
+

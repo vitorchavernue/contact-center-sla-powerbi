@@ -1,0 +1,8 @@
+/// Partner managers see only their own partner (dynamic row-level security by user e-mail).
+role 'Partner Manager'
+	modelPermission: read
+
+	tablePermission Partner = 'Partner'[Partner Key] IN CALCULATETABLE ( VALUES ( 'Partner Access'[Partner Key] ), 'Partner Access'[User Email] = USERPRINCIPALNAME () )
+
+	tablePermission 'Partner Access' = 'Partner Access'[User Email] = USERPRINCIPALNAME ()
+

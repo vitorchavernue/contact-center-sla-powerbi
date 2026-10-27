@@ -1,0 +1,25 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-US
+
+annotation PBI_QueryOrder = ["DataFolder", "RangeStart", "RangeEnd", "Contacts", "Service Agreement", "Partner", "Channel", "Queue", "Date", "Time Interval", "Partner Access"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Contacts
+ref table 'Service Agreement'
+ref table Partner
+ref table Channel
+ref table Queue
+ref table Date
+ref table 'Time Interval'
+ref table 'Time Intelligence'
+ref table 'Partner Access'
+
+ref role 'Partner Manager'
+ref role 'Contact Center Management'
+

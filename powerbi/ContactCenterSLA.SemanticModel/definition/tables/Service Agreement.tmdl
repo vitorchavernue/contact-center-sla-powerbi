@@ -1,0 +1,61 @@
+/// Contract of each partner on each channel: wait limit, service level target and short-abandon limit.
+table 'Service Agreement'
+
+	column 'Service Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: Service Key
+
+	column 'Partner Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: Partner Key
+
+	column 'Channel Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: Channel Key
+
+	/// A contact answered within this many seconds counts as answered on time.
+	column 'SLA Threshold Seconds'
+		dataType: int64
+		formatString: 0" s"
+		summarizeBy: none
+		sourceColumn: SLA Threshold Seconds
+
+	/// Share of contacts that must be answered on time.
+	column 'SLA Target'
+		dataType: double
+		formatString: 0%
+		summarizeBy: none
+		sourceColumn: SLA Target
+
+	/// Abandons up to this wait are not counted against the partner.
+	column 'Short Abandon Seconds'
+		dataType: int64
+		formatString: 0" s"
+		summarizeBy: none
+		sourceColumn: Short Abandon Seconds
+
+	/// Contract label, e.g. "Atlas BPO · Voice · 80% in 20 s".
+	column Contract = RELATED ( Partner[Partner] ) & " · " & RELATED ( Channel[Channel] ) & " · " & FORMAT ( 'Service Agreement'[SLA Target], "0%" ) & " in " & 'Service Agreement'[SLA Threshold Seconds] & " s"
+		dataType: string
+		summarizeBy: none
+
+	partition 'Service Agreement' = m
+		mode: import
+		source =
+				let
+					Source = Parquet.Document ( File.Contents ( DataFolder & "dimensions\service_agreement.parquet" ) ),
+					Typed = Table.TransformColumnTypes ( Source, { { "Service Key", Int64.Type }, { "Partner Key", Int64.Type }, { "Channel Key", Int64.Type }, { "SLA Threshold Seconds", Int64.Type }, { "SLA Target", type number }, { "Short Abandon Seconds", Int64.Type } } )
+				in
+					Typed
+
+	annotation PBI_ResultType = Table
+

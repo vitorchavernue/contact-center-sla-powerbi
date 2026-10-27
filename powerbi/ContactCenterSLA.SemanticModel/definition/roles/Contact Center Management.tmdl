@@ -1,0 +1,4 @@
+/// The bank's contact center management team: every partner.
+role 'Contact Center Management'
+	modelPermission: read
+

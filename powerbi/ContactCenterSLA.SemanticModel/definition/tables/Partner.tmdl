@@ -1,0 +1,31 @@
+/// BPO partners that answer the bank's customers.
+table Partner
+
+	column 'Partner Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: Partner Key
+
+	column Partner
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Partner
+
+	column Site
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Site
+
+	partition Partner = m
+		mode: import
+		source =
+				let
+					Source = Parquet.Document ( File.Contents ( DataFolder & "dimensions\partner.parquet" ) ),
+					Typed = Table.TransformColumnTypes ( Source, { { "Partner Key", Int64.Type }, { "Partner", type text }, { "Site", type text } } )
+				in
+					Typed
+
+	annotation PBI_ResultType = Table
+

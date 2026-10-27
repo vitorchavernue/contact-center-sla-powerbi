@@ -1,0 +1,75 @@
+/// Calendar (marked as the date table for time intelligence).
+table Date
+	dataCategory: Time
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: Short Date
+		summarizeBy: none
+		sourceColumn: Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: Year
+
+	column 'Month Start'
+		dataType: dateTime
+		isHidden
+		formatString: Short Date
+		summarizeBy: none
+		sourceColumn: Month Start
+
+	column Month
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Month
+		sortByColumn: 'Month Index'
+
+	column 'Month Index'
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: Month Index
+
+	column Weekday
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Weekday
+		sortByColumn: 'Weekday Number'
+
+	column 'Weekday Number'
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: Weekday Number
+
+	column 'Day Type'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Day Type
+
+	partition Date = m
+		mode: import
+		source =
+				let
+					Start = #date ( 2024, 10, 1 ),
+					End = #date ( 2026, 12, 31 ),
+					Dates = List.Dates ( Start, Duration.Days ( End - Start ) + 1, #duration ( 1, 0, 0, 0 ) ),
+					Base = Table.FromList ( Dates, Splitter.SplitByNothing (), type table [ Date = date ] ),
+					Year = Table.AddColumn ( Base, "Year", each Date.Year ( [Date] ), Int64.Type ),
+					MonthStart = Table.AddColumn ( Year, "Month Start", each Date.StartOfMonth ( [Date] ), type date ),
+					Month = Table.AddColumn ( MonthStart, "Month", each Date.ToText ( [Date], "MMM yyyy", "en-US" ), type text ),
+					MonthIndex = Table.AddColumn ( Month, "Month Index", each Date.Year ( [Date] ) * 12 + Date.Month ( [Date] ), Int64.Type ),
+					WeekdayNumber = Table.AddColumn ( MonthIndex, "Weekday Number", each Date.DayOfWeek ( [Date], Day.Monday ) + 1, Int64.Type ),
+					Weekday = Table.AddColumn ( WeekdayNumber, "Weekday", each Date.ToText ( [Date], "ddd", "en-US" ), type text ),
+					DayType = Table.AddColumn ( Weekday, "Day Type", each if Date.DayOfWeek ( [Date], Day.Monday ) < 5 then "Weekday" else "Weekend", type text )
+				in
+					DayType
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,41 @@
+/// Calculation group: the same measure for the current period, month/year to date and against last year.
+table 'Time Intelligence'
+
+	calculationGroup
+		precedence: 10
+
+		calculationItem Current = SELECTEDMEASURE ()
+
+		calculationItem MTD = CALCULATE ( SELECTEDMEASURE (), DATESMTD ( 'Date'[Date] ) )
+
+		calculationItem YTD = CALCULATE ( SELECTEDMEASURE (), DATESYTD ( 'Date'[Date] ) )
+
+		calculationItem PY = CALCULATE ( SELECTEDMEASURE (), SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+
+		calculationItem 'YoY Δ' =
+				VAR current = SELECTEDMEASURE ()
+				VAR previous = CALCULATE ( SELECTEDMEASURE (), SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+				RETURN IF ( NOT ISBLANK ( current ) && NOT ISBLANK ( previous ), current - previous )
+
+		calculationItem 'YoY %' =
+				VAR current = SELECTEDMEASURE ()
+				VAR previous = CALCULATE ( SELECTEDMEASURE (), SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+				RETURN IF ( NOT ISBLANK ( current ) && NOT ISBLANK ( previous ), DIVIDE ( current - previous, previous ) )
+
+			formatStringDefinition = "+0.0%;-0.0%;0.0%"
+
+	column Period
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+	column Ordinal
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+	partition 'Time Intelligence' = calculationGroup
+

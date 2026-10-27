@@ -1,0 +1,34 @@
+/// Half-hour intervals of the day (contact centers are planned and measured by interval).
+table 'Time Interval'
+
+	column 'Interval Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: Interval Key
+
+	column Interval
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Interval
+		sortByColumn: 'Interval Key'
+
+	column 'Day Period'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Day Period
+
+	partition 'Time Interval' = m
+		mode: import
+		source =
+				let
+					Keys = List.Numbers ( 0, 48 ),
+					Base = Table.FromList ( Keys, Splitter.SplitByNothing (), type table [ #"Interval Key" = Int64.Type ] ),
+					Interval = Table.AddColumn ( Base, "Interval", each Text.PadStart ( Text.From ( Number.IntegerDivide ( [Interval Key], 2 ) ), 2, "0" ) & ( if Number.Mod ( [Interval Key], 2 ) = 0 then ":00" else ":30" ), type text ),
+					Period = Table.AddColumn ( Interval, "Day Period", each if [Interval Key] < 16 then "Night" else if [Interval Key] < 24 then "Morning" else if [Interval Key] < 36 then "Afternoon" else "Evening", type text )
+				in
+					Period
+
+	annotation PBI_ResultType = Table
+
