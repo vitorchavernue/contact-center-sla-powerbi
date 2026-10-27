@@ -13,14 +13,14 @@ table 'Time Intelligence'
 		calculationItem PY = CALCULATE ( SELECTEDMEASURE (), SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
 
 		calculationItem 'YoY Δ' =
-				VAR current = SELECTEDMEASURE ()
-				VAR previous = CALCULATE ( SELECTEDMEASURE (), SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
-				RETURN IF ( NOT ISBLANK ( current ) && NOT ISBLANK ( previous ), current - previous )
+				VAR CurrentValue = SELECTEDMEASURE ()
+				VAR PreviousValue = CALCULATE ( SELECTEDMEASURE (), SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+				RETURN IF ( NOT ISBLANK ( CurrentValue ) && NOT ISBLANK ( PreviousValue ), CurrentValue - PreviousValue )
 
 		calculationItem 'YoY %' =
-				VAR current = SELECTEDMEASURE ()
-				VAR previous = CALCULATE ( SELECTEDMEASURE (), SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
-				RETURN IF ( NOT ISBLANK ( current ) && NOT ISBLANK ( previous ), DIVIDE ( current - previous, previous ) )
+				VAR CurrentValue = SELECTEDMEASURE ()
+				VAR PreviousValue = CALCULATE ( SELECTEDMEASURE (), SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+				RETURN IF ( NOT ISBLANK ( CurrentValue ) && NOT ISBLANK ( PreviousValue ), DIVIDE ( CurrentValue - PreviousValue, PreviousValue ) )
 
 			formatStringDefinition = "+0.0%;-0.0%;0.0%"
 

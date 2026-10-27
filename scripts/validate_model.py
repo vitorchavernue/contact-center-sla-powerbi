@@ -112,6 +112,45 @@ def model_rules(model) -> list[Result]:
     )
 
     # DAX
+    # DAX keywords cannot be variable names (e.g. CURRENT is reserved): the query fails only when a visual runs it
+    reserved = {
+        "current",
+        "previous",
+        "next",
+        "first",
+        "last",
+        "value",
+        "values",
+        "table",
+        "column",
+        "measure",
+        "define",
+        "evaluate",
+        "order",
+        "by",
+        "start",
+        "at",
+        "return",
+        "var",
+        "true",
+        "false",
+        "not",
+        "in",
+    }
+    expressions = [(ms.Name, ms.Expression) for _, ms in measures] + [
+        (f"{t.Name}[{item.Name}]", item.Expression)
+        for t in tables
+        if t.CalculationGroup is not None
+        for item in t.CalculationGroup.CalculationItems
+    ]
+    rule(
+        "DAX variables do not use reserved words",
+        [
+            name
+            for name, expr in expressions
+            if any(v.lower() in reserved for v in re.findall(r"\bVAR\s+([A-Za-z_][\w]*)", expr or "", re.IGNORECASE))
+        ],
+    )
     division = re.compile(r"\]\s*/\s*[\[\w(]")
     rule(
         "Measures divide with DIVIDE (no division by zero errors)",

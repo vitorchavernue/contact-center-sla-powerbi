@@ -13,7 +13,7 @@ Built as an enterprise Power BI project:
 - **Incremental refresh**: rolling 24 months, only the last 3 days refreshed, monthly Parquet files pruned by the query
 - **Report as code**: pages, visuals and page designs generated from one layout spec
 - **CI quality gate**: the model is loaded with Microsoft's **Tabular Object Model** and checked against
-  **18 best-practice rules**, and every field used by the report must exist in the model
+  **19 best-practice rules**, and every field used by the report must exist in the model
 
 > Data is synthetic (fictitious partners), generated with realistic contact center behaviour: intraday peaks,
 > waits that grow with load, customers who give up, WhatsApp growing every month.
@@ -107,6 +107,7 @@ PASS  Relationships use whole-number or date keys
 PASS  One table is marked as the date table
 PASS  Text columns with a natural order have a sort column
 PASS  Measures divide with DIVIDE (no division by zero errors)
+PASS  DAX variables do not use reserved words
 PASS  The fact table has an incremental refresh policy using RangeStart/RangeEnd
 PASS  Row-level security: at least one role filters by the signed-in user
 PASS  Time intelligence comes from a calculation group
@@ -114,7 +115,7 @@ PASS  Every field used by the 51 visuals exists in the model
 PASS  Every navigation button points to an existing page
 PASS  Every page background image is in the project
 
-18/18 rules passed
+19/19 rules passed
 ```
 
 Tests also prove the gate catches mistakes (a measure without description, a `/` division, a visual using a
