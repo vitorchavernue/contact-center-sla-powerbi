@@ -71,7 +71,7 @@ table Date
 		source =
 				let
 					Start = #date ( 2024, 10, 1 ),
-					End = #date ( 2026, 12, 31 ),
+					End = #date ( 2026, 9, 30 ),
 					Dates = List.Dates ( Start, Duration.Days ( End - Start ) + 1, #duration ( 1, 0, 0, 0 ) ),
 					Base = Table.FromList ( Dates, Splitter.SplitByNothing (), type table [ Date = date ] ),
 					Year = Table.AddColumn ( Base, "Year", each Date.Year ( [Date] ), Int64.Type ),

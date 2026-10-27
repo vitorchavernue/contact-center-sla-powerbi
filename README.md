@@ -18,7 +18,7 @@ Built as an enterprise Power BI project:
 > Data is synthetic (fictitious partners), generated with realistic contact center behaviour: intraday peaks,
 > waits that grow with load, customers who give up, WhatsApp growing every month.
 
-![Report cover](docs/images/cover.png)
+![Report cover](docs/images/cover.jpg)
 
 ---
 
@@ -50,7 +50,13 @@ The average hides three problems the report is built to expose:
 | **Service level overview** | Service level vs target by month, gap to target by partner, volume by channel |
 | **Intraday** | Service level and volume by half-hour, intervals furthest below target, share of intervals meeting the target |
 | **Partner scorecard** | Each contract (partner × channel) with service level, gap, status, abandon, ASA and AHT — the monthly SLA review |
-| **Trends and YoY** | YTD and year-over-year cards, this year vs previous year, monthly matrix by calculation item |
+| **Trends and YoY** | 2026 YTD vs the same months of 2025 (service level −0.8 pp, volume +13.1%), this year vs previous year, monthly matrix by calculation item |
+
+![Service level overview](docs/images/overview.png)
+
+![Intraday performance](docs/images/intraday.png)
+
+![Partner scorecard](docs/images/scorecard.png)
 
 ## Semantic model
 

@@ -139,6 +139,31 @@ def in_filter(name, entity, prop, values):
 
 
 PERIOD = ("Time Intelligence", "Period")
+LAST_YEAR = 2026  # last full year of data in the cards (Jan-Sep 2026 vs Jan-Sep 2025)
+
+
+def year_filter(name, year=LAST_YEAR):
+    """Visual-level filter: Date[Year] = year."""
+    return {
+        "name": name,
+        "field": c("Date", "Year"),
+        "type": "Categorical",
+        "filter": {
+            "Version": 2,
+            "From": [{"Name": "d", "Entity": "Date", "Type": 0}],
+            "Where": [
+                {
+                    "Condition": {
+                        "In": {
+                            "Expressions": [{"Column": {"Expression": {"SourceRef": {"Source": "d"}}, "Property": "Year"}}],
+                            "Values": [[{"Literal": {"Value": f"{year}L"}}]],
+                        }
+                    }
+                }
+            ],
+        },
+    }
+
 
 # ------------------------------------------------------------------ page model
 NAV = [
@@ -297,6 +322,7 @@ def chart(
     filters=None,
     labels=False,
     colors=None,
+    axis_range=None,
 ):
     page.frame(vid, x, y, w, h, "chart")
     state = {"Category": {"projections": [proj(category)]}, "Y": {"projections": [proj(v, d) for v, d in values]}}
@@ -320,6 +346,9 @@ def chart(
             {"properties": {"fill": color(col)}, "selector": {"metadata": proj(v)["queryRef"]}}
             for (v, _), col in zip(values, colors, strict=False)
         ]
+    if axis_range:  # zoom the value axis so small differences against the target are visible
+        objects["valueAxis"][0]["properties"]["start"] = num(axis_range[0])
+        objects["valueAxis"][0]["properties"]["end"] = num(axis_range[1])
     if kind == "lineChart":
         objects["lineStyles"] = [{"properties": {"strokeWidth": num(3)}}]
     if kind == "clusteredBarChart":
@@ -599,9 +628,10 @@ def scorecard():
         c("Partner", "Partner"),
         [(m("Service Level %"), "Service level"), (m("SLA Target %"), "Target")],
         "Service level vs target",
-        "By partner",
+        "By partner · axis from 70%",
         sort=(c("Partner", "Partner"), "Ascending"),
         colors=[TEAL_600, CORAL],
+        axis_range=(0.7, 1),
     )
     return p
 
@@ -618,7 +648,16 @@ def trends():
     w4 = round((X1 - X0 - 36) / 4)
     k4 = [X0 + i * (w4 + 12) for i in range(4)]
     card(
-        p, "k_sl_ytd", k4[0], Y0, w4, 92, m("Service Level %"), "Service level YTD", "check", [in_filter("ytd", *PERIOD, ["YTD"])]
+        p,
+        "k_sl_ytd",
+        k4[0],
+        Y0,
+        w4,
+        92,
+        m("Service Level %"),
+        "Service level 2026 YTD",
+        "check",
+        [in_filter("ytd", *PERIOD, ["YTD"]), year_filter("y")],
     )
     card(
         p,
@@ -628,11 +667,22 @@ def trends():
         w4,
         92,
         m("Service Level %"),
-        "Service level vs last year (pp)",
+        "Service level vs same period 2025 (pp)",
         "trend",
-        [in_filter("yoy", *PERIOD, ["YoY Δ"])],
+        [in_filter("yoy", *PERIOD, ["YoY Δ"]), year_filter("y")],
     )
-    card(p, "k_vol_ytd", k4[2], Y0, w4, 92, m("Contacts Offered"), "Contacts YTD", "users", [in_filter("ytd", *PERIOD, ["YTD"])])
+    card(
+        p,
+        "k_vol_ytd",
+        k4[2],
+        Y0,
+        w4,
+        92,
+        m("Contacts Offered"),
+        "Contacts 2026 YTD",
+        "users",
+        [in_filter("ytd", *PERIOD, ["YTD"]), year_filter("y")],
+    )
     card(
         p,
         "k_vol_yoy",
@@ -641,9 +691,9 @@ def trends():
         w4,
         92,
         m("Contacts Offered"),
-        "Contacts vs last year",
+        "Contacts vs same period 2025",
         "trend",
-        [in_filter("yoy", *PERIOD, ["YoY %"])],
+        [in_filter("yoy", *PERIOD, ["YoY %"]), year_filter("y")],
     )
     chart(
         p,

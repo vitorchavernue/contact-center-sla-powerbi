@@ -168,6 +168,20 @@
                   }
                 }
               }
+            },
+            "start": {
+              "expr": {
+                "Literal": {
+                  "Value": "0.7D"
+                }
+              }
+            },
+            "end": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
             }
           }
         }
@@ -401,7 +415,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'By partner'"
+                  "Value": "'By partner · axis from 70%'"
                 }
               }
             },
