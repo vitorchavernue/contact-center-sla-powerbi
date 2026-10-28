@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1250" viewBox="0 0 1920 1250">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0D0C0E"/><stop offset="1" stop-color="#17151A"/></linearGradient>
+  <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#5EEAD4"/><stop offset="1" stop-color="#0F766E"/></linearGradient>
+  <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1800 0) scale(900)">
+    <stop stop-color="#14B8A6" stop-opacity="0.16"/><stop offset="1" stop-color="#14B8A6" stop-opacity="0"/></radialGradient>
+  <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="#fff" fill-opacity="0.04"/></pattern>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0 0 L10 5 L0 10 z" fill="#5EEAD4"/></marker>
+</defs>
+<rect width="1920" height="1250" rx="28" fill="url(#bg)"/>
+<rect width="1920" height="1250" rx="28" fill="url(#glow)"/>
+<rect width="1920" height="1250" rx="28" fill="url(#dots)"/>
+<g id="Header">
+<circle cx="88" cy="78" r="30" fill="none" stroke="url(#accent)" stroke-width="2.5"/><g transform="translate(70.0 60.0) scale(1.5000)" fill="none" stroke="#5EEAD4" stroke-width="2.00" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 14v-2a7.5 7.5 0 0 1 15 0v2"/><rect x="3.5" y="13.5" width="4" height="6" rx="1.5"/><rect x="16.5" y="13.5" width="4" height="6" rx="1.5"/><path d="M18.5 19.5c0 1.2-2 2-5 2"/></g>
+<text x="136.0" y="70.0" font-family="Inter, Segoe UI, sans-serif" font-size="17" font-weight="600" fill="#5EEAD4" text-anchor="start" letter-spacing="4">ARCHITECTURE</text>
+<text x="136.0" y="108.0" font-family="Inter, Segoe UI, sans-serif" font-size="38" font-weight="800" fill="#F4F1F5" text-anchor="start">Contact Center SLA — Power BI</text>
+<text x="1860.0" y="70.0" font-family="Inter, Segoe UI, sans-serif" font-size="17" font-weight="500" fill="#B0A9B5" text-anchor="end">Power BI · DAX · Power Query · TMDL · Python</text>
+<text x="1860.0" y="100.0" font-family="Inter, Segoe UI, sans-serif" font-size="17" font-weight="400" fill="#7E7684" text-anchor="end">contacts → Parquet → Power Query → semantic model → report → quality gate</text>
+<rect x="60" y="138" width="1800" height="1.5" fill="#37333C"/><rect x="60" y="137.5" width="120" height="2.5" fill="url(#accent)"/>
+</g>
+<rect x="60" y="172" width="1800" height="92" rx="20" fill="#1B191E" stroke="#37333C" stroke-width="1.5"/>
+<circle cx="112" cy="218" r="26" fill="#232027" stroke="#0F766E" stroke-width="1.5"/>
+<g transform="translate(96.0 202.0) scale(1.3333)" fill="none" stroke="#5EEAD4" stroke-width="1.90" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12.5" r="8"/><path d="M12 8v4.5l3 2"/></g>
+<text x="154.0" y="212.0" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="700" fill="#5EEAD4" text-anchor="start" letter-spacing="3">REFRESH</text>
+<text x="154.0" y="238.0" font-family="Inter, Segoe UI, sans-serif" font-size="20" font-weight="700" fill="#F4F1F5" text-anchor="start">Power BI service · incremental refresh</text>
+<rect x="612.0" y="202.0" width="366.0" height="29" rx="14.5" fill="#232027" stroke="#FBBF24" stroke-opacity="0.6" stroke-width="1.2"/><text x="624.0" y="220.5" font-family="JetBrains Mono, Consolas, monospace" font-size="15" font-weight="600" fill="#FBBF24" text-anchor="start">24 months kept · last 3 days refreshed</text>
+<rect x="1004.0" y="202.0" width="158.4" height="29" rx="14.5" fill="#232027" stroke="#5EEAD4" stroke-opacity="0.6" stroke-width="1.2"/><text x="1016.0" y="220.5" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="600" fill="#5EEAD4" text-anchor="start">1  Parquet files</text>
+<path d="M1168.4 216.5 h14" stroke="#5EEAD4" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1190.4" y="202.0" width="141.6" height="29" rx="14.5" fill="#232027" stroke="#5EEAD4" stroke-opacity="0.6" stroke-width="1.2"/><text x="1202.4" y="220.5" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="600" fill="#5EEAD4" text-anchor="start">2  Power Query</text>
+<path d="M1338.0 216.5 h14" stroke="#5EEAD4" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1360.0" y="202.0" width="166.8" height="29" rx="14.5" fill="#232027" stroke="#5EEAD4" stroke-opacity="0.6" stroke-width="1.2"/><text x="1372.0" y="220.5" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="600" fill="#5EEAD4" text-anchor="start">3  Semantic model</text>
+<path d="M1532.8 216.5 h14" stroke="#5EEAD4" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1554.8" y="202.0" width="99.6" height="29" rx="14.5" fill="#232027" stroke="#5EEAD4" stroke-opacity="0.6" stroke-width="1.2"/><text x="1566.8" y="220.5" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="600" fill="#5EEAD4" text-anchor="start">4  Report</text>
+<rect x="1682.4" y="202.0" width="141.6" height="28" rx="14.0" fill="#232027" stroke="#34D399" stroke-opacity="0.6" stroke-width="1.2"/><text x="1694.4" y="219.5" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#34D399" text-anchor="start">RLS per partner</text>
+<g id="Layer 1 Contacts">
+<rect x="60.0" y="300" width="318.4" height="561.0" rx="22" fill="#1B191E" stroke="#37333C" stroke-width="1.5"/>
+<rect x="86.0" y="300" width="70" height="3.5" rx="1.75" fill="url(#accent)"/>
+<circle cx="112.0" cy="356" r="28" fill="#232027" stroke="#0F766E" stroke-width="1.5"/>
+<g transform="translate(95.0 339.0) scale(1.4167)" fill="none" stroke="#5EEAD4" stroke-width="1.90" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 14v-2a7.5 7.5 0 0 1 15 0v2"/><rect x="3.5" y="13.5" width="4" height="6" rx="1.5"/><rect x="16.5" y="13.5" width="4" height="6" rx="1.5"/><path d="M18.5 19.5c0 1.2-2 2-5 2"/></g>
+<text x="352.4" y="348.0" font-family="Inter, Segoe UI, sans-serif" font-size="30" font-weight="800" fill="#37333C" text-anchor="end">01</text>
+<text x="86.0" y="418.0" font-family="Inter, Segoe UI, sans-serif" font-size="24" font-weight="800" fill="#F4F1F5" text-anchor="start">Contacts</text>
+<text x="86.0" y="449.6" font-family="JetBrains Mono, Consolas, monospace" font-size="14" font-weight="600" fill="#5EEAD4" text-anchor="start">contacts/contacts_YYYY-MM.parquet</text>
+<text x="86.0" y="470.5" font-family="Inter, Segoe UI, sans-serif" font-size="14.5" font-weight="400" fill="#B0A9B5" text-anchor="start">6 BPO partners · voice and</text><text x="86.0" y="490.1" font-family="Inter, Segoe UI, sans-serif" font-size="14.5" font-weight="400" fill="#B0A9B5" text-anchor="start">WhatsApp</text>
+<rect x="86.0" y="505.6" width="266.4" height="1" fill="#37333C"/>
+<circle cx="91.0" cy="534.6" r="3.5" fill="#14B8A6"/>
+<text x="104.0" y="539.6" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">1.51 million contacts in 24</text><text x="104.0" y="560.9" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">monthly files</text>
+<circle cx="91.0" cy="589.2" r="3.5" fill="#14B8A6"/>
+<text x="104.0" y="594.2" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">Intraday peaks, waits that</text><text x="104.0" y="615.5" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">grow with load, customers who</text><text x="104.0" y="636.9" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">give up</text>
+<circle cx="91.0" cy="665.1" r="3.5" fill="#14B8A6"/>
+<text x="104.0" y="670.1" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">Generated by</text><text x="104.0" y="691.4" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">scripts/generate_data.py</text><text x="104.0" y="712.8" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">(fictitious partners)</text>
+<rect x="78.0" y="783.0" width="282.4" height="60" rx="12" fill="#232027"/>
+<text x="92.0" y="810.0" font-family="Inter, Segoe UI, sans-serif" font-size="13" font-weight="400" fill="#B0A9B5" text-anchor="start">One file per month: refresh reads</text><text x="92.0" y="827.9" font-family="Inter, Segoe UI, sans-serif" font-size="13" font-weight="400" fill="#B0A9B5" text-anchor="start">only what it needs</text>
+</g>
+<path d="M384.4 580.5 h38" stroke="#5EEAD4" stroke-width="2.5" marker-end="url(#arrow)"/>
+<g id="Layer 2 Power Query">
+<rect x="430.4" y="300" width="318.4" height="561.0" rx="22" fill="#1B191E" stroke="#37333C" stroke-width="1.5"/>
+<rect x="456.4" y="300" width="70" height="3.5" rx="1.75" fill="url(#accent)"/>
+<circle cx="482.4" cy="356" r="28" fill="#232027" stroke="#0F766E" stroke-width="1.5"/>
+<g transform="translate(465.4 339.0) scale(1.4167)" fill="none" stroke="#5EEAD4" stroke-width="1.90" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16l-6 7.5V19l-4 1.5v-8z"/></g>
+<text x="722.8" y="348.0" font-family="Inter, Segoe UI, sans-serif" font-size="30" font-weight="800" fill="#37333C" text-anchor="end">02</text>
+<text x="456.4" y="418.0" font-family="Inter, Segoe UI, sans-serif" font-size="24" font-weight="800" fill="#F4F1F5" text-anchor="start">Power Query</text>
+<text x="456.4" y="449.6" font-family="JetBrains Mono, Consolas, monospace" font-size="14" font-weight="600" fill="#5EEAD4" text-anchor="start">RangeStart · RangeEnd</text>
+<text x="456.4" y="470.5" font-family="Inter, Segoe UI, sans-serif" font-size="14.5" font-weight="400" fill="#B0A9B5" text-anchor="start">M · incremental refresh</text>
+<rect x="456.4" y="486.1" width="266.4" height="1" fill="#37333C"/>
+<circle cx="461.4" cy="515.1" r="3.5" fill="#14B8A6"/>
+<text x="474.4" y="520.1" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">Files filtered by month before</text><text x="474.4" y="541.4" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">they are read (partition</text><text x="474.4" y="562.7" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">pruning)</text>
+<circle cx="461.4" cy="591.0" r="3.5" fill="#14B8A6"/>
+<text x="474.4" y="596.0" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">Rolling 24 months; only the</text><text x="474.4" y="617.3" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">last 3 days refreshed</text>
+<circle cx="461.4" cy="645.6" r="3.5" fill="#14B8A6"/>
+<text x="474.4" y="650.6" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">DataFolder parameter: the same</text><text x="474.4" y="671.9" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">project runs on any machine</text>
+<rect x="448.4" y="783.0" width="282.4" height="60" rx="12" fill="#232027"/>
+<text x="462.4" y="810.0" font-family="Inter, Segoe UI, sans-serif" font-size="13" font-weight="400" fill="#B0A9B5" text-anchor="start">Fast refresh at any data volume</text>
+</g>
+<path d="M754.8 580.5 h38" stroke="#5EEAD4" stroke-width="2.5" marker-end="url(#arrow)"/>
+<g id="Layer 3 Semantic model">
+<rect x="800.8" y="300" width="318.4" height="561.0" rx="22" fill="#1B191E" stroke="#37333C" stroke-width="1.5"/>
+<rect x="826.8" y="300" width="70" height="3.5" rx="1.75" fill="url(#accent)"/>
+<circle cx="852.8" cy="356" r="28" fill="#232027" stroke="#0F766E" stroke-width="1.5"/>
+<g transform="translate(835.8 339.0) scale(1.4167)" fill="none" stroke="#5EEAD4" stroke-width="1.90" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></g>
+<text x="1093.2" y="348.0" font-family="Inter, Segoe UI, sans-serif" font-size="30" font-weight="800" fill="#37333C" text-anchor="end">03</text>
+<text x="826.8" y="418.0" font-family="Inter, Segoe UI, sans-serif" font-size="24" font-weight="800" fill="#F4F1F5" text-anchor="start">Semantic model</text>
+<text x="826.8" y="449.6" font-family="JetBrains Mono, Consolas, monospace" font-size="14" font-weight="600" fill="#5EEAD4" text-anchor="start">TMDL in Git</text>
+<text x="826.8" y="470.5" font-family="Inter, Segoe UI, sans-serif" font-size="14.5" font-weight="400" fill="#B0A9B5" text-anchor="start">star schema · 16 measures</text>
+<rect x="826.8" y="486.1" width="266.4" height="1" fill="#37333C"/>
+<text x="826.8" y="520.1" font-family="Inter, Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#7E7684" text-anchor="start" letter-spacing="2">DIMENSIONS</text>
+<rect x="826.8" y="534.1" width="51.2" height="28" rx="14" fill="#232027" stroke="#93C5FD" stroke-opacity="0.55"/>
+<text x="836.8" y="553.1" font-family="Inter, Segoe UI, sans-serif" font-size="13" font-weight="600" fill="#93C5FD" text-anchor="start">Date</text>
+<rect x="886.0" y="534.1" width="121.4" height="28" rx="14" fill="#232027" stroke="#93C5FD" stroke-opacity="0.55"/>
+<text x="896.0" y="553.1" font-family="Inter, Segoe UI, sans-serif" font-size="13" font-weight="600" fill="#93C5FD" text-anchor="start">Time Interval</text>
+<rect x="1015.4" y="534.1" width="74.6" height="28" rx="14" fill="#232027" stroke="#93C5FD" stroke-opacity="0.55"/>
+<text x="1025.4" y="553.1" font-family="Inter, Segoe UI, sans-serif" font-size="13" font-weight="600" fill="#93C5FD" text-anchor="start">Partner</text>
+<rect x="826.8" y="570.1" width="74.6" height="28" rx="14" fill="#232027" stroke="#93C5FD" stroke-opacity="0.55"/>
+<text x="836.8" y="589.1" font-family="Inter, Segoe UI, sans-serif" font-size="13" font-weight="600" fill="#93C5FD" text-anchor="start">Channel</text>
+<rect x="909.4" y="570.1" width="59.0" height="28" rx="14" fill="#232027" stroke="#93C5FD" stroke-opacity="0.55"/>
+<text x="919.4" y="589.1" font-family="Inter, Segoe UI, sans-serif" font-size="13" font-weight="600" fill="#93C5FD" text-anchor="start">Queue</text>
+<rect x="826.8" y="606.1" width="152.6" height="28" rx="14" fill="#232027" stroke="#93C5FD" stroke-opacity="0.55"/>
+<text x="836.8" y="625.1" font-family="Inter, Segoe UI, sans-serif" font-size="13" font-weight="600" fill="#93C5FD" text-anchor="start">Service Agreement</text>
+<text x="826.8" y="668.1" font-family="Inter, Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#7E7684" text-anchor="start" letter-spacing="2">FACT</text>
+<rect x="826.8" y="682.1" width="266.4" height="46" rx="10" fill="#232027" stroke="#FBBF24" stroke-opacity="0.5"/>
+<text x="840.8" y="702.1" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#F4F1F5" text-anchor="start">Contacts</text>
+<text x="840.8" y="720.1" font-family="Inter, Segoe UI, sans-serif" font-size="12" font-weight="500" fill="#FBBF24" text-anchor="start">wait, handle time, outcome</text>
+<rect x="818.8" y="783.0" width="282.4" height="60" rx="12" fill="#232027"/>
+<text x="832.8" y="810.0" font-family="Inter, Segoe UI, sans-serif" font-size="13" font-weight="400" fill="#B0A9B5" text-anchor="start">SLA rules belong to the contract,</text><text x="832.8" y="827.9" font-family="Inter, Segoe UI, sans-serif" font-size="13" font-weight="400" fill="#B0A9B5" text-anchor="start">not to the contact</text>
+</g>
+<path d="M1125.2 580.5 h38" stroke="#5EEAD4" stroke-width="2.5" marker-end="url(#arrow)"/>
+<g id="Layer 4 Governance">
+<rect x="1171.2" y="300" width="318.4" height="561.0" rx="22" fill="#1B191E" stroke="#37333C" stroke-width="1.5"/>
+<rect x="1197.2" y="300" width="70" height="3.5" rx="1.75" fill="url(#accent)"/>
+<circle cx="1223.2" cy="356" r="28" fill="#232027" stroke="#0F766E" stroke-width="1.5"/>
+<g transform="translate(1206.2 339.0) scale(1.4167)" fill="none" stroke="#5EEAD4" stroke-width="1.90" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.2-7.5 9.9-4.3-1.7-7.5-5.3-7.5-9.9V6z"/><path d="M8.8 12.2l2.2 2.2 4.3-4.6"/></g>
+<text x="1463.6" y="348.0" font-family="Inter, Segoe UI, sans-serif" font-size="30" font-weight="800" fill="#37333C" text-anchor="end">04</text>
+<text x="1197.2" y="418.0" font-family="Inter, Segoe UI, sans-serif" font-size="24" font-weight="800" fill="#F4F1F5" text-anchor="start">Governance</text>
+<text x="1197.2" y="449.6" font-family="JetBrains Mono, Consolas, monospace" font-size="14" font-weight="600" fill="#5EEAD4" text-anchor="start">Partner Access · Time</text><text x="1197.2" y="468.5" font-family="JetBrains Mono, Consolas, monospace" font-size="14" font-weight="600" fill="#5EEAD4" text-anchor="start">Intelligence</text>
+<text x="1197.2" y="489.4" font-family="Inter, Segoe UI, sans-serif" font-size="14.5" font-weight="400" fill="#B0A9B5" text-anchor="start">row-level security · calculation</text><text x="1197.2" y="509.0" font-family="Inter, Segoe UI, sans-serif" font-size="14.5" font-weight="400" fill="#B0A9B5" text-anchor="start">group</text>
+<rect x="1197.2" y="524.6" width="266.4" height="1" fill="#37333C"/>
+<circle cx="1202.2" cy="553.6" r="3.5" fill="#14B8A6"/>
+<text x="1215.2" y="558.6" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">Dynamic RLS: each partner</text><text x="1215.2" y="579.9" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">manager sees only their</text><text x="1215.2" y="601.2" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">partner (USERPRINCIPALNAME)</text>
+<circle cx="1202.2" cy="629.5" r="3.5" fill="#14B8A6"/>
+<text x="1215.2" y="634.5" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">Calculation group: MTD, YTD,</text><text x="1215.2" y="655.8" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">PY, YoY for every measure</text>
+<circle cx="1202.2" cy="684.1" r="3.5" fill="#14B8A6"/>
+<text x="1215.2" y="689.1" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">Implicit measures off, keys</text><text x="1215.2" y="710.4" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">hidden, every measure</text><text x="1215.2" y="731.7" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">documented</text>
+<rect x="1189.2" y="783.0" width="282.4" height="60" rx="12" fill="#232027"/>
+<text x="1203.2" y="810.0" font-family="Inter, Segoe UI, sans-serif" font-size="13" font-weight="400" fill="#B0A9B5" text-anchor="start">Same numbers for everyone, filtered</text><text x="1203.2" y="827.9" font-family="Inter, Segoe UI, sans-serif" font-size="13" font-weight="400" fill="#B0A9B5" text-anchor="start">by who you are</text>
+</g>
+<path d="M1495.6 580.5 h38" stroke="#5EEAD4" stroke-width="2.5" marker-end="url(#arrow)"/>
+<g id="Layer 5 Report and gate">
+<rect x="1541.6" y="300" width="318.4" height="561.0" rx="22" fill="#1B191E" stroke="#37333C" stroke-width="1.5"/>
+<rect x="1567.6" y="300" width="70" height="3.5" rx="1.75" fill="url(#accent)"/>
+<circle cx="1593.6" cy="356" r="28" fill="#232027" stroke="#0F766E" stroke-width="1.5"/>
+<g transform="translate(1576.6 339.0) scale(1.4167)" fill="none" stroke="#5EEAD4" stroke-width="1.90" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></g>
+<text x="1834.0" y="348.0" font-family="Inter, Segoe UI, sans-serif" font-size="30" font-weight="800" fill="#37333C" text-anchor="end">05</text>
+<text x="1567.6" y="418.0" font-family="Inter, Segoe UI, sans-serif" font-size="24" font-weight="800" fill="#F4F1F5" text-anchor="start">Report and gate</text>
+<text x="1567.6" y="449.6" font-family="JetBrains Mono, Consolas, monospace" font-size="14" font-weight="600" fill="#5EEAD4" text-anchor="start">PBIR · build_report.py</text>
+<text x="1567.6" y="470.5" font-family="Inter, Segoe UI, sans-serif" font-size="14.5" font-weight="400" fill="#B0A9B5" text-anchor="start">report as code · Tabular Object</text><text x="1567.6" y="490.1" font-family="Inter, Segoe UI, sans-serif" font-size="14.5" font-weight="400" fill="#B0A9B5" text-anchor="start">Model</text>
+<rect x="1567.6" y="505.6" width="266.4" height="1" fill="#37333C"/>
+<circle cx="1572.6" cy="534.6" r="3.5" fill="#14B8A6"/>
+<text x="1585.6" y="539.6" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">4 pages: overview, intraday,</text><text x="1585.6" y="560.9" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">partner scorecard, trends and</text><text x="1585.6" y="582.2" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">YoY</text>
+<circle cx="1572.6" cy="610.5" r="3.5" fill="#14B8A6"/>
+<text x="1585.6" y="615.5" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">Pages, visuals and backgrounds</text><text x="1585.6" y="636.8" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">generated from one layout spec</text>
+<circle cx="1572.6" cy="665.1" r="3.5" fill="#14B8A6"/>
+<text x="1585.6" y="670.1" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">CI loads the model with TOM</text><text x="1585.6" y="691.4" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">and applies 19 best-practice</text><text x="1585.6" y="712.8" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="400" fill="#F4F1F5" text-anchor="start">rules</text>
+<rect x="1559.6" y="783.0" width="282.4" height="60" rx="12" fill="#232027"/>
+<text x="1573.6" y="810.0" font-family="Inter, Segoe UI, sans-serif" font-size="13" font-weight="400" fill="#B0A9B5" text-anchor="start">A broken measure never reaches the</text><text x="1573.6" y="827.9" font-family="Inter, Segoe UI, sans-serif" font-size="13" font-weight="400" fill="#B0A9B5" text-anchor="start">report</text>
+</g>
+<rect x="60" y="901.0" width="888.0" height="310" rx="22" fill="#1B191E" stroke="#37333C" stroke-width="1.5"/>
+<g transform="translate(88.0 927.0) scale(1.2500)" fill="none" stroke="#5EEAD4" stroke-width="1.90" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"/></g>
+<text x="130.0" y="951.0" font-family="Inter, Segoe UI, sans-serif" font-size="22" font-weight="800" fill="#F4F1F5" text-anchor="start">Where the code is</text>
+<rect x="88" y="981.0" width="832.0" height="62" rx="10" fill="#232027"/>
+<rect x="88" y="981.0" width="5" height="62" rx="2.5" fill="#5EEAD4"/>
+<text x="108.0" y="1007.0" font-family="JetBrains Mono, Consolas, monospace" font-size="14" font-weight="600" fill="#F4F1F5" text-anchor="start">powerbi/ContactCenterSLA.SemanticModel</text>
+<text x="908.0" y="1007.0" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="700" fill="#5EEAD4" text-anchor="end">TMDL · DAX · M</text>
+<text x="108.0" y="1030.0" font-family="Inter, Segoe UI, sans-serif" font-size="13.5" font-weight="400" fill="#B0A9B5" text-anchor="start">Tables, measures, roles, refresh policy, calculation group</text>
+<rect x="88" y="1051.0" width="832.0" height="62" rx="10" fill="#232027"/>
+<rect x="88" y="1051.0" width="5" height="62" rx="2.5" fill="#FBBF24"/>
+<text x="108.0" y="1077.0" font-family="JetBrains Mono, Consolas, monospace" font-size="14" font-weight="600" fill="#F4F1F5" text-anchor="start">powerbi/ContactCenterSLA.Report · scripts</text>
+<text x="908.0" y="1077.0" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="700" fill="#FBBF24" text-anchor="end">PBIR · Python</text>
+<text x="108.0" y="1100.0" font-family="Inter, Segoe UI, sans-serif" font-size="13.5" font-weight="400" fill="#B0A9B5" text-anchor="start">Report as code, synthetic data, reference KPIs in pandas, quality gate</text>
+<rect x="88" y="1121.0" width="832.0" height="62" rx="10" fill="#232027"/>
+<rect x="88" y="1121.0" width="5" height="62" rx="2.5" fill="#34D399"/>
+<text x="108.0" y="1147.0" font-family="JetBrains Mono, Consolas, monospace" font-size="14" font-weight="600" fill="#F4F1F5" text-anchor="start">tests · .github/workflows</text>
+<text x="908.0" y="1147.0" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="700" fill="#34D399" text-anchor="end">pytest · CI</text>
+<text x="108.0" y="1170.0" font-family="Inter, Segoe UI, sans-serif" font-size="13.5" font-weight="400" fill="#B0A9B5" text-anchor="start">The gate catches broken measures; the data has the stories the report shows</text>
+<rect x="972.0" y="901.0" width="888.0" height="310" rx="22" fill="#1B191E" stroke="#37333C" stroke-width="1.5"/>
+<g transform="translate(1000.0 927.0) scale(1.2500)" fill="none" stroke="#FBBF24" stroke-width="1.90" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16a8 8 0 1 1 16 0"/><path d="M12 16l4.5-5"/><circle cx="12" cy="16" r="1.5"/></g>
+<text x="1042.0" y="951.0" font-family="Inter, Segoe UI, sans-serif" font-size="22" font-weight="800" fill="#F4F1F5" text-anchor="start">What the report shows</text>
+<rect x="1000.0" y="983.0" width="199.0" height="202" rx="14" fill="#232027"/>
+<rect x="1018.0" y="983.0" width="44" height="3" rx="1.5" fill="#FBBF24"/>
+<text x="1018.0" y="1047.0" font-family="Inter, Segoe UI, sans-serif" font-size="40" font-weight="800" fill="#FBBF24" text-anchor="start">89.2%</text>
+<text x="1018.0" y="1085.0" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="400" fill="#B0A9B5" text-anchor="start">service level vs a</text><text x="1018.0" y="1104.8" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="400" fill="#B0A9B5" text-anchor="start">83.4% weighted target</text>
+<rect x="1211.0" y="983.0" width="199.0" height="202" rx="14" fill="#232027"/>
+<rect x="1229.0" y="983.0" width="44" height="3" rx="1.5" fill="#FBBF24"/>
+<text x="1229.0" y="1047.0" font-family="Inter, Segoe UI, sans-serif" font-size="40" font-weight="800" fill="#FBBF24" text-anchor="start">75%</text>
+<text x="1229.0" y="1085.0" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="400" fill="#B0A9B5" text-anchor="start">service level in the</text><text x="1229.0" y="1104.8" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="400" fill="#B0A9B5" text-anchor="start">10:00–10:30 peak,</text><text x="1229.0" y="1124.7" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="400" fill="#B0A9B5" text-anchor="start">hidden by the daily</text><text x="1229.0" y="1144.6" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="400" fill="#B0A9B5" text-anchor="start">average</text>
+<rect x="1422.0" y="983.0" width="199.0" height="202" rx="14" fill="#232027"/>
+<rect x="1440.0" y="983.0" width="44" height="3" rx="1.5" fill="#FBBF24"/>
+<text x="1440.0" y="1047.0" font-family="Inter, Segoe UI, sans-serif" font-size="40" font-weight="800" fill="#FBBF24" text-anchor="start">−13 pp</text>
+<text x="1440.0" y="1085.0" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="400" fill="#B0A9B5" text-anchor="start">Delta CX voice since</text><text x="1440.0" y="1104.8" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="400" fill="#B0A9B5" text-anchor="start">March 2026: a</text><text x="1440.0" y="1124.7" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="400" fill="#B0A9B5" text-anchor="start">capacity problem</text>
+<rect x="1633.0" y="983.0" width="199.0" height="202" rx="14" fill="#232027"/>
+<rect x="1651.0" y="983.0" width="44" height="3" rx="1.5" fill="#FBBF24"/>
+<text x="1651.0" y="1047.0" font-family="Inter, Segoe UI, sans-serif" font-size="40" font-weight="800" fill="#FBBF24" text-anchor="start">19/19</text>
+<text x="1651.0" y="1085.0" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="400" fill="#B0A9B5" text-anchor="start">best-practice rules</text><text x="1651.0" y="1104.8" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="400" fill="#B0A9B5" text-anchor="start">passed in CI</text>
+</svg>
